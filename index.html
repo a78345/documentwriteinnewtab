@@ -11,6 +11,7 @@
 <button onclick="handleFileSelect();">Open loaded HTML file in about:blank</button>
 <textarea style="display:none;" id="textarea"><h1>You either want to see this or your dumba** forgot to load a file.</h1></textarea>
 <span id="filenamedisplay" style="display:none;">Random File</span>
+<p><a href="https://github.com/a78345/documentwriteinnewtab">Source code link: https://github.com/a78345/documentwriteinnewtab</a></p>
 <script type="text/javascript">
 document.getElementById("noscriptelement").style.display="none";
 document.getElementById("noscriptelement").innerHTML="";
@@ -39,7 +40,7 @@ console.error("Error reading file:",e.target.error);
 reader.readAsText(file);
 document.getElementById("filenamedisplay").innerHTML=file.name;
 }else{
-alert("Select a file you idiot.");
+alert("Select a file.");
 }
 }
 </script>
