@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<title>Open HTML file in about:blank</title>
+</head>
+<body>
+<h1 id="noscriptelement">You need JavaScript for this to work.</h1>
+<input type="file" id="fileInput" accept="text/*, application/xml, image/svg+xml, application/xhtml+xml, .htm, .html, .xml, .svg, .xht, .xhtml" />
+<button onclick="handleFileSelect();">Open loaded HTML file in about:blank</button>
+<textarea style="display:none;" id="textarea"><h1>You either want to see this or your dumba** forgot to load a file.</h1></textarea>
+<span id="filenamedisplay" style="display:none;">Random File</span>
+<script type="text/javascript">
+document.getElementById("noscriptelement").style.display="none";
+document.getElementById("noscriptelement").innerHTML="";
+function openBlankWithHTML() {
+var newWindow=window.open();
+newWindow.document.open();
+newWindow.document.write(document.getElementById("textarea").value);
+if (document.getElementById("textarea").value.indexOf("<title>")==-1){
+newWindow.document.title = document.getElementById("filenamedisplay").innerHTML;
+}
+newWindow.document.close();
+}
+function handleFileSelect() {
+var file=document.getElementById("fileInput").files[0];
+if(file){
+var reader=new FileReader();
+reader.onload=function(e){
+var contents=e.target.result;
+document.getElementById("textarea").value=contents;
+openBlankWithHTML();
+};
+reader.onerror=function(e) {
+window.alert("Error reading file:"+e.target.error);
+console.error("Error reading file:",e.target.error);
+};
+reader.readAsText(file);
+document.getElementById("filenamedisplay").innerHTML=file.name;
+}else{
+alert("Select a file you idiot.");
+}
+}
+</script>
+</body>
+</html>
